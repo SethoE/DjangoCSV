@@ -1,0 +1,9 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block css_link %}
+<link rel="stylesheet" href="{% static "converter/converter.css"%}">
+{% endblock css_link %}
+{% block page_title %}CSV to XLSX converter{% endblock page_title %}
+{% block body %}
+    <h1 class="title">Do you want to convert your CSV-file into a XLSX-file?</h1>
+{% endblock body %}

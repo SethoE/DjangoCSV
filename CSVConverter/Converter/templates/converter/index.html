@@ -1,0 +1,9 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block css_link %}
+<link rel="stylesheet" href="{% static "converter/converter.css"%}">
+{% endblock css_link %}
+{% block page_title %}CSV Converter{% endblock page_title %}
+{% block body %}
+    <h1 class="title">Hallo this a your CSV-Converter</h1>
+{% endblock body %}
