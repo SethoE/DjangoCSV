@@ -6,7 +6,7 @@ html, body {
 }
 
 .navbar {
-    background-color:  #2bbbad; /*Navigation bar color*/
+    background-color:  #148CAC; /*Navigation bar color*/
     overflow: hidden;
 }
 /* Style the links inside the navigation bar */
@@ -19,13 +19,11 @@ html, body {
     font-size: 17px;
 
 }
-.navbar a:hover {
-    background-color: #dcdcdc;
-}
 
-.navbar a.active{
-    background-color: #148cac;
-    color: rgb(243,243,243);
+
+.navbar a:hover {
+    background-color: #04323F;
+    color: white;
 }
 
 /*Style for the sidebar*/

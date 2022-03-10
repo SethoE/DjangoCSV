@@ -4,6 +4,21 @@
 <link rel="stylesheet" href="{% static "converter/converter.css"%}">
 {% endblock css_link %}
 {% block page_title %}CSV to XLSX converter{% endblock page_title %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 {% block body %}
-    <h1 class="title">Do you want to convert your CSV-file into a XLSX-file?</h1>
+    <h1 class="title">CSV in XLSX umwandeln</h1>
+    <p class="pageDescription">Die CSV-Datei muss momentan einen bestimmten
+        Format entsprechen, um richtig in eine XLSX-Datei konvertiert zu werden.</p>
+    <div class="outerButtonFlied">
+        <div class="innerButtonField">
+            <i id="topIcon" class="fa fa-file-text-o"></i>
+            <button class="uploadButton">
+                <div class="buttonElements">
+                    <i id="buttonIcon" class="fa fa-file-text-o"></i>
+                    <p class="buttonText">Datei auswählen</p>
+                </div>
+            </button>
+            <p class="buttonDescription">Hier kannst du deine CSV-Datei ablegen</p>
+        </div>
+    </div>
 {% endblock body %}

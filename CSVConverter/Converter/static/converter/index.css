@@ -1,0 +1,8 @@
+.title, .pageDescription {
+    text-align: center;
+}
+
+.navbar a.index {
+    background-color: #04323F;
+    color: white;
+}
