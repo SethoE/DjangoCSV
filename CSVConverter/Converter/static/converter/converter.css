@@ -6,7 +6,7 @@
     color: white;
 }
 
-.uploadButton:hover {
+.uploadButton:hover, .selectButton:hover {
     background-color: #F2F2F2;
 }
 
