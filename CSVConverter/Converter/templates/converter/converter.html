@@ -2,23 +2,56 @@
 {% load static %}
 {% block css_link %}
 <link rel="stylesheet" href="{% static "converter/converter.css"%}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+/>
 {% endblock css_link %}
 {% block page_title %}CSV to XLSX converter{% endblock page_title %}
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 {% block body %}
-    <h1 class="title">CSV in XLSX umwandeln</h1>
-    <p class="pageDescription">Die CSV-Datei muss momentan einen bestimmten
-        Format entsprechen, um richtig in eine XLSX-Datei konvertiert zu werden.</p>
-    <div class="outerButtonFlied">
-        <div class="innerButtonField">
-            <i id="topIcon" class="fa fa-file-text-o"></i>
-            <button class="uploadButton">
-                <div class="buttonElements">
-                    <i id="buttonIcon" class="fa fa-file-text-o"></i>
-                    <p class="buttonText">Datei auswählen</p>
-                </div>
-            </button>
-            <p class="buttonDescription">Hier kannst du deine CSV-Datei ablegen</p>
+<h1 class="title">CSV in XLSX umwandeln</h1>
+<p class="pageDescription">
+  Die CSV-Datei muss momentan einen bestimmten Format entsprechen, um richtig in
+  eine XLSX-Datei konvertiert zu werden.
+</p>
+<form action="" method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+  <input type="file" id="selectFile" name="csv" onclick="selection()"/>
+  <div class="outerButtonFlied">
+    <div class="innerButtonField">
+      <i id="topIcon" class="fa fa-file-text-o"></i>
+      <button type="button" class="selectButton" id="selectButton" onclick="chooseFile();">
+        <div class="buttonElements">
+          <i id="buttonIcon" class="fa fa-file-text-o"></i>
+          <p class="buttonText">Datei auswählen</p>
         </div>
+      </button>
+      <button type="submit" class="uploadButton" id="uploadButton">
+        <div class="buttonElements">
+          <i id="buttonIcon" class="fa fa-file-text-o"></i>
+          <p class="buttonText">Datei hochladen</p>
+        </div>
+      </button>
+      <p class="buttonDescription">Hier kannst du deine CSV-Datei ablegen</p>
     </div>
+  </div>
+</form>
+<script defer>
+    var selectedFile = document.getElementById("selectedFile");
+    function selection() {
+        document.body.onfocus = checkIfFileSelected();
+        console.log('initialising...');
+    }
+    function chooseFile() {
+        selectFile.click();
+    }
+    function checkIfFileSelected() {
+        if(selectedFile.value.length) {
+            alert("File as been loaded");
+        }
+        else {
+            alert("File as not been loaded");
+        }
+        document.body.onfocus = null;
+        console.log("checked");
+    }
+</script>
 {% endblock body %}

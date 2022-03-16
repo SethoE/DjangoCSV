@@ -6,8 +6,9 @@
     color: white;
 }
 
-.uploadButton:hover {
+.uploadButton:hover, .selectButton:hover {
     background-color: #F2F2F2;
+    cursor: pointer;
 }
 
 .navbar a.converter {
@@ -58,8 +59,23 @@
     margin-right: 15px;
     font-size: 24px;
 }
+#selectFile {
+    display: none;
+}
 
+.selectButton {
+    background-color: white;
+    color: black;
+    outline: none;
+    border: none;
+    font-size: 18px;
+    margin: auto;
+    width: 30%;
+    height: auto;
+    border-radius: 3px;
+}
 .uploadButton {
+    display: none;
     background-color: white;
     color: black;
     outline: none;
