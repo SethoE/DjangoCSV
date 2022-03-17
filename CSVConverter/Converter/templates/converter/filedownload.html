@@ -1,0 +1,9 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block css_link %}
+<link rel="stylesheet" href="{% static "converter/filedownload.css"%}">
+{% endblock css_link %}
+{% block page_title %}File Download{% endblock page_title %}
+{% block body %}
+<h1 class="body_title">Hi, here you can download your converted file.</h1>
+{% endblock body %}
