@@ -35,23 +35,50 @@
   </div>
 </form>
 <script defer>
-    var selectedFile = document.getElementById("selectedFile");
+    var selectedFile = document.getElementById("selectFile");
+    var selecButton = document.getElementById("selectButton");
+    var uploadButton = document.getElementById("uploadButton")
     function selection() {
-        document.body.onfocus = checkIfFileSelected();
-        console.log('initialising...');
+      console.log("Button pressed")
+        
     }
     function chooseFile() {
-        selectFile.click();
+      selectedFile.click();
     }
-    function checkIfFileSelected() {
-        if(selectedFile.value.length) {
-            alert("File as been loaded");
-        }
-        else {
-            alert("File as not been loaded");
-        }
-        document.body.onfocus = null;
-        console.log("checked");
+    selecButton.onchange = function(event) {
+      var target = event.target || event.srcElement;
+      /*console.log(target, "changed.");
+      console.log(event);
+      */
+      if (selectedFile.value.length == 0) {
+        /*
+        console.log("Suspect Cancel was hit, no files selected.");
+        */
+      } else {
+        uploadButton.style.display = "block";
+        selecButton.style.display = "none";
+        /*
+        console.log("File selected: ", selectedFile.value);
+        */
+      }
+    }
+    selecButton.onblur = function(event) {
+      /*
+      var target = event.target || event.srcElement;
+      console.log(target, "changed.");
+      console.log(event);
+      */
+      if (selectedFile.value.length == 0) {
+        /*
+        console.log("Suspect Cancel was hit, no files selected.");
+        */
+      } else {
+        uploadButton.style.display = "block";
+        selecButton.style.display = "none";
+        /*
+        console.log("File selected: ", selectedFile.value);
+        */
+      }
     }
 </script>
 {% endblock body %}
