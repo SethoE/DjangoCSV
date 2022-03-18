@@ -3,7 +3,11 @@
 html, body {
     font-family: 'Nunito Sans', sans-serif;
     margin: 0 !important;
+    min-width: 860px;        /* Suppose you want minimum width of 1000px */
+    width: auto !important;  /* Firefox will set width as auto */
+    width: 1500px;
 }
+
 
 .navbar {
     background-color:  #148CAC; /*Navigation bar color*/
@@ -17,6 +21,7 @@ html, body {
     padding: 14px 16px;
     text-decoration: none;
     font-size: 17px;
+    font-weight: bold;
 
 }
 

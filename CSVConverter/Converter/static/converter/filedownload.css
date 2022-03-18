@@ -1,3 +1,74 @@
+.title, .pageDescription, .buttonDescription {
+    text-align: center;
+}
+.buttonDescription {
+    color: white;
+}
 .body_title {
     text-align: center;
+}
+
+.bottonContainer {
+    display: block;
+    margin: 0 auto;
+}
+/* Box styling */
+
+.outerButtonFlied {
+    display: block;
+    background-color: #04323f;
+    padding: 10px;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+.innerButtonField {
+    position: relative;
+    display: flex;
+    padding: 20px 40px 0px 40px;
+    flex-direction: column;
+    background-color: #148cac;
+    border-color: #045f79;
+    border-style: dashed;
+    border-width: 2px;
+    border-radius: 5px;
+
+}
+/* Button styling */
+.buttonElements {
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: center;
+}
+
+.buttonText {
+    margin: 0;
+}
+#topIcon {
+    padding: 15px;
+    color: white;
+    text-align: center;
+    font-size: 48px;
+}
+#buttonIcon {
+    margin-right: 15px;
+    font-size: 24px;
+}
+.downloadButton:hover {
+    background-color: #F2F2F2;
+    cursor: pointer;
+}
+.downloadButton {
+    background-color: white;
+    color: black;
+    outline: none;
+    border: none;
+    font-size: 18px;
+    margin: auto;
+    width: 30%;
+    height: auto;
+    border-radius: 3px;
+
 }

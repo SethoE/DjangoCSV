@@ -1,3 +1,4 @@
+from audioop import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views import View
@@ -12,7 +13,6 @@ import xlsxwriter as xlsx
 import os
 import mimetypes
 from django.http.response import HttpResponse
-from io import BytesIO
 # Create your views here.
 
 # # Function for storing files
@@ -38,7 +38,7 @@ class UploadFileView(View):
             file = request.FILES["user_file"]
             store_file(file)
             ConvertToXLSX(file)
-            return HttpResponseRedirect("download")
+            return HttpResponseRedirect("download file")
         return render(request, "converter/converter.html", {
             "form": submitted_form
         })
@@ -48,7 +48,6 @@ def index(request):
 
 class DownloadView(View):
     def get(self, request):
-        download_file()
         return render(request, "converter/filedownload.html")
 
 class alpabet():
@@ -61,6 +60,24 @@ class alpabet():
         for j in range(26):
             excel_alphabet.append(excel_alphabet[i - 1] + excel_alphabet[j])
         return excel_alphabet
+
+def download_file(request):
+    # Define Django project base directory
+    BASE_DIR = os.path.dirname(os.path.abspath(__name__))
+    # Define text file name
+    filename = 'table(2) (converted).xlsx'
+    # Define the full file path
+    filepath = BASE_DIR + f"\\download\\{filename}"
+    # Open the file for reading content
+    path = open(filepath, 'rb')
+    # Set the mime type
+    mime_type, _ = mime_type, _ = mimetypes.guess_type(filepath)
+    # Set the return value of the HttpResponse
+    response = HttpResponse(path, content_type=mime_type)
+    # Set the HTTP header for sending to browser
+    response['Content-Disposition'] = "attachment; filename=%s" % filename
+    # Return the response value
+    return response
 
 def ConvertToXLSX(file: str):
     print(file)
@@ -80,7 +97,7 @@ def ConvertToXLSX(file: str):
     cell_format_number = workbook.add_format()
     cell_format_number.set_num_format('0')
     cell_format_currency.set_num_format('€#,##0.00')
-    with open(filepath, newline='') as your_csv_file:
+    with open(filepath, newline="") as your_csv_file:
         reader = csv.reader(your_csv_file)
         data = []
         keys = []
@@ -89,14 +106,14 @@ def ConvertToXLSX(file: str):
             column_length = [0] * len(row[1])
             break
         alphabet = alpabet.generate_excel_alphabet()
-    with open(filepath, newline='') as your_csv_file:
+    with open(filepath, newline="") as your_csv_file:
         reader = csv.reader(your_csv_file)
         for idx, row in enumerate(reader):
             for i in range(len(row)):
                 string_row = str(row[i])
                 if(column_length[i] < len(string_row)):
                     column_length[i] = len(string_row)
-    with open(filepath, newline='') as your_csv_file:
+    with open(filepath, newline="") as your_csv_file:
         reader = csv.reader(your_csv_file)
         for idx, row in enumerate(reader):
             if(idx == 0):
@@ -120,21 +137,3 @@ def ConvertToXLSX(file: str):
             for i in range(len(column_length)):
                 worksheet.set_column(i,idx, column_length[i])
     workbook.close()
-   
-def download_file(request):
-    # Define Django project base directory
-    BASE_DIR = os.path.dirname(os.path.abspath(__name__))
-    # Define text file name
-    filename = 'table(2) (converted).xlsx'
-    # Define the full file path
-    filepath = BASE_DIR + f"\\download\\{filename}"  
-    # Open the file for reading content
-    path = open(filepath, 'r', encoding="iso-8859-15")
-    # Set the mime type
-    mime_type, _ = mime_type, _ = mimetypes.guess_type(filepath)
-    # Set the return value of the HttpResponse
-    response = HttpResponse(path, content_type=mime_type)
-    # Set the HTTP header for sending to browser
-    response['Content-Disposition'] = "attachment; filename=%s" % filename
-    # Return the response value
-    return response

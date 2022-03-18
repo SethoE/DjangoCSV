@@ -2,8 +2,26 @@
 {% load static %}
 {% block css_link %}
 <link rel="stylesheet" href="{% static "converter/filedownload.css"%}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 {% endblock css_link %}
 {% block page_title %}File Download{% endblock page_title %}
 {% block body %}
 <h1 class="body_title">Hi, here you can download your converted file.</h1>
+<div class="outerButtonFlied">
+    <div class="innerButtonField">
+      <i id="topIcon" class="fa fa-download"></i>
+      <button type="button" class="downloadButton" id="downloadButton" onclick="downloadFile();">
+        <div class="buttonElements">
+          <i id="buttonIcon" class="fa fa-download"></i>
+          <p class="buttonText">Datei auswählen</p>
+        </div>
+      </button>
+      <p class="buttonDescription">Hier kannst du eine XLSX-Datei herunterlanden.</p>
+    </div>
+</div>
+<script defer>
+    function downloadFile() {
+        window.location.href = "/download"
+    }
+</script>
 {% endblock body %}
