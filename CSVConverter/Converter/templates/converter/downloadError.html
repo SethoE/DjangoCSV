@@ -1,0 +1,9 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block css_link %}
+<link rel="stylesheet" href="{% static "converter/filedownload.css"%}">
+{% endblock css_link %}
+{% block page_title %}File Download Error{% endblock page_title %}
+{% block body %}
+<h1 class="body_title">Es scheint kein Fehler ausgetretten zu sein.</h1>
+{% endblock body %}

@@ -14,7 +14,6 @@ import os
 import mimetypes
 from django.http.response import HttpResponse
 # Create your views here.
-
 # # Function for storing files
 def store_file(file):
     with open("temp/file.csv", "wb+") as destination:
@@ -35,10 +34,10 @@ class UploadFileView(View):
     def post(self, request):
         submitted_form = ConverterForm(request.POST, request.FILES)
         if(submitted_form.is_valid):
-            file = request.FILES["user_file"]
-            store_file(file)
-            ConvertToXLSX(file)
-            return HttpResponseRedirect("download file")
+            uploaded_file_name = request.FILES["user_file"]
+            store_file(uploaded_file_name)
+            ConvertToXLSX(uploaded_file_name)
+            return HttpResponseRedirect(f"download file/{uploaded_file_name}")
         return render(request, "converter/converter.html", {
             "form": submitted_form
         })
@@ -61,26 +60,32 @@ class alpabet():
             excel_alphabet.append(excel_alphabet[i - 1] + excel_alphabet[j])
         return excel_alphabet
 
-def download_file(request):
+def download_file(request, filename):
     # Define Django project base directory
     BASE_DIR = os.path.dirname(os.path.abspath(__name__))
     # Define text file name
-    filename = 'table(2) (converted).xlsx'
+    filename = filename
     # Define the full file path
     filepath = BASE_DIR + f"\\download\\{filename}"
     # Open the file for reading content
-    path = open(filepath, 'rb')
-    # Set the mime type
-    mime_type, _ = mime_type, _ = mimetypes.guess_type(filepath)
-    # Set the return value of the HttpResponse
-    response = HttpResponse(path, content_type=mime_type)
-    # Set the HTTP header for sending to browser
-    response['Content-Disposition'] = "attachment; filename=%s" % filename
-    # Return the response value
-    return response
+    try:
+        path = open(filepath, 'rb')
+        # Set the mime type
+        mime_type, _ = mime_type, _ = mimetypes.guess_type(filepath)
+        # Set the return value of the HttpResponse
+        response = HttpResponse(path, content_type=mime_type)
+        # Set the HTTP header for sending to browser
+        response['Content-Disposition'] = "attachment; filename=%s" % filename
+        # Return the response value
+        return response
+    except:
+         return HttpResponseRedirect("file error")
+    
+class File_download_error(View):
+    def get(self, request):
+        return render(request, "converter/downloaderror.html")
 
 def ConvertToXLSX(file: str):
-    print(file)
     file_str = str(file)
     picked_filename_without_file_extension = file_str.replace(".csv", "")
     # Pick save location
