@@ -80,7 +80,6 @@ def download_file(request):
     return response
 
 def ConvertToXLSX(file: str):
-    print(file)
     file_str = str(file)
     picked_filename_without_file_extension = file_str.replace(".csv", "")
     # Pick save location
