@@ -15,7 +15,7 @@ from django.http.response import HttpResponse
 # # Function for storing files
 def store_file(file):
     BASE_DIR = os.path.dirname(os.path.abspath(__name__))
-    filepath = BASE_DIR + "\\CSVConverter\\temp\\file.csv"
+    filepath = BASE_DIR + "\\temp\\file.csv"
     with open(filepath, "wb+") as destination:
         for chunk in file.chunks():
               destination.write(chunk)
@@ -100,8 +100,8 @@ def ConvertToXLSX(file: str):
     picked_filename_without_file_extension = file_str.replace(".csv", "")
     # Pick save location
     BASE_DIR = os.path.dirname(os.path.abspath(__name__))
-    save_location = BASE_DIR + "\\CSVConverter\\download"
-    filepath = BASE_DIR + "\\CSVConverter\\temp\\file.csv"
+    save_location = BASE_DIR + "\\download"
+    filepath = BASE_DIR + "\\temp\\file.csv"
     # Workbook() takes one, non-optional, argument
     # which is the filename that we want to create.
     save_file_name = f"{picked_filename_without_file_extension}_(converted).xlsx"
