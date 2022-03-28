@@ -11,20 +11,13 @@ import xlsxwriter as xlsx
 import os
 import mimetypes
 from django.http.response import HttpResponse
-# Create your views here.
-# # Function for storing files
+
 def store_file(file):
     BASE_DIR = os.path.dirname(os.path.abspath(__name__))
-    filepath = BASE_DIR + "\\temp\\file.csv"
+    filepath = BASE_DIR + f"\\temp\\{file}"
     with open(filepath, "wb+") as destination:
         for chunk in file.chunks():
               destination.write(chunk)
-
-# class CreateConverterView(CreateView):
-#     template_name = "converter/converter.html"
-#     model = FileConverter
-#     fields = "__all__"
-#     success_url = "/download file"
 class UploadFileView(View):
     def get(self, request):
         form = ConverterForm()
@@ -38,13 +31,8 @@ class UploadFileView(View):
             store_file(uploaded_file_name)
             converted_file =  ConvertToXLSX(uploaded_file_name)
             if(converted_file == NULL ):
-                print("something when wrong")
                 return HttpResponseRedirect("file error")
-            os.remove(converted_file["filepath"])
-            response = HttpResponse(converted_file["file"], content_type="application/vnd.ms-excel")
-            response['Content-Disposition'] = 'inline; filename=' + converted_file["filename"]
-            return response
-            # return HttpResponseRedirect(f"download file/{uploaded_file_name}")
+            return HttpResponseRedirect(f"download file/filename={converted_file['filename']}")
         return render(request, "converter/converter.html", {
             "form": submitted_form
         })
@@ -55,8 +43,10 @@ class Login(View):
     def get(self, request):
         return render(request, "converter/login.html")
 class DownloadView(View):
-    def get(self, request):
-        return render(request, "converter/filedownload.html")
+    def get(self, request, filename):
+        return render(request, "converter/filedownload.html", {
+            "filename": filename
+        })
 
 class alpabet():
     excel_alphabet = []
@@ -69,27 +59,20 @@ class alpabet():
             excel_alphabet.append(excel_alphabet[i - 1] + excel_alphabet[j])
         return excel_alphabet
 
-def download_file(request, converted_file):
-    print("Filename: " + converted_file["filename"])
-    # Define Django project base directory
+def download_file(request, filename):
     BASE_DIR = os.path.dirname(os.path.abspath(__name__))
-    # Define text file name
     filename = filename
-    # Define the full file path
     filepath = BASE_DIR + f"\\download\\{filename}"
-    # Open the file for reading content
     try:
         path = open(filepath, 'rb')
-        # Set the mime type
         mime_type, _ = mime_type, _ = mimetypes.guess_type(filepath)
-        # Set the return value of the HttpResponse
         response = HttpResponse(path, content_type=mime_type)
-        # Set the HTTP header for sending to browser
         response['Content-Disposition'] = "attachment; filename=%s" % filename
-        # Return the response value
         return response
     except:
          return HttpResponseRedirect("file error")
+    finally:
+        os.remove(filepath)
 
 class File_download_error(View):
     def get(self, request):
@@ -98,16 +81,12 @@ class File_download_error(View):
 def ConvertToXLSX(file: str):
     file_str = str(file)
     picked_filename_without_file_extension = file_str.replace(".csv", "")
-    # Pick save location
     BASE_DIR = os.path.dirname(os.path.abspath(__name__))
     save_location = BASE_DIR + "\\download"
-    filepath = BASE_DIR + "\\temp\\file.csv"
-    # Workbook() takes one, non-optional, argument
-    # which is the filename that we want to create.
+    filepath = BASE_DIR + f"\\temp\\{file_str}"
     save_file_name = f"{picked_filename_without_file_extension}_(converted).xlsx"
     save_file_path = f"{save_location}\\{save_file_name}"
     workbook = xlsx.Workbook(save_file_path)
-    # The workbook object is then used to add new worksheet via the add_worksheet() method.
     worksheet = workbook.add_worksheet()
     cell_format_currency = workbook.add_format()
     cell_format_number = workbook.add_format()
@@ -159,7 +138,6 @@ def ConvertToXLSX(file: str):
                     "filename": save_file_name,
                     "filepath": save_file_path}
     except:
-        print("An exception occurred")
         return NULL
     finally:
         os.remove(filepath)
