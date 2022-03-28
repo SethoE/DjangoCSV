@@ -1,0 +1,23 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block css_link %}
+<link rel="stylesheet" href="{% static "converter/login.css"%}">
+{% endblock css_link %}
+{% block page_title %}File Download{% endblock page_title %}
+{% block body %}
+<h1 class="body_title">Bitte melde dich hier mit deinem Konto-Intomationen hier ein.</h1>
+<form class="loginForm">
+    <div class="loginContainer">
+        <h1 class="loginTitle">Login</h1>
+        <div class="emailContainer">
+            <p class="inputEmailDescription">E-Mail:</p>
+            <input class="email" type="text" name="email" placeholder="Enter your E-mail here">
+        </div>
+        <div class="passwordContainer">
+            <p class="inputPasswordDescription">Password:</p>
+            <input class="password" type="password" name="password" placeholder="Enter your password here">
+        </div>
+        <button class="loginButton" type="submit">Login</button>
+    </div>
+</form>
+{% endblock body %}

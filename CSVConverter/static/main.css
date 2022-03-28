@@ -14,7 +14,7 @@ html, body {
     overflow: hidden;
 }
 /* Style the links inside the navigation bar */
-.navbar a {
+.index, .converter {
     float: left; /*right of the container*/
     color: #181243; /*Text Color*/
     text-align: center;
@@ -23,6 +23,15 @@ html, body {
     font-size: 17px;
     font-weight: bold;
 
+}
+.login {
+  float: right; /*right of the container*/
+  color: #181243; /*Text Color*/
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  font-weight: bold;
 }
 
 

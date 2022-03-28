@@ -11,11 +11,12 @@ import xlsxwriter as xlsx
 import os
 import mimetypes
 from django.http.response import HttpResponse
-from django.core.files.temp import NamedTemporaryFile
 # Create your views here.
 # # Function for storing files
 def store_file(file):
-    with open("temp/file.csv", "wb+") as destination:
+    BASE_DIR = os.path.dirname(os.path.abspath(__name__))
+    filepath = BASE_DIR + "\\CSVConverter\\temp\\file.csv"
+    with open(filepath, "wb+") as destination:
         for chunk in file.chunks():
               destination.write(chunk)
 
@@ -36,7 +37,8 @@ class UploadFileView(View):
             uploaded_file_name = request.FILES["user_file"]
             store_file(uploaded_file_name)
             converted_file =  ConvertToXLSX(uploaded_file_name)
-            if(converted_file["filepath"] == NULL):
+            if(converted_file == NULL ):
+                print("something when wrong")
                 return HttpResponseRedirect("file error")
             os.remove(converted_file["filepath"])
             response = HttpResponse(converted_file["file"], content_type="application/vnd.ms-excel")
@@ -49,9 +51,11 @@ class UploadFileView(View):
 
 def index(request):
     return render(request, "converter/index.html")
-
+class Login(View):
+    def get(self, request):
+        return render(request, "converter/login.html")
 class DownloadView(View):
-    def get(self, request, filename):
+    def get(self, request):
         return render(request, "converter/filedownload.html")
 
 class alpabet():
@@ -96,12 +100,12 @@ def ConvertToXLSX(file: str):
     picked_filename_without_file_extension = file_str.replace(".csv", "")
     # Pick save location
     BASE_DIR = os.path.dirname(os.path.abspath(__name__))
-    save_location = BASE_DIR + "\\download"
-    filepath = BASE_DIR + "\\temp\\file.csv"
+    save_location = BASE_DIR + "\\CSVConverter\\download"
+    filepath = BASE_DIR + "\\CSVConverter\\temp\\file.csv"
     # Workbook() takes one, non-optional, argument
     # which is the filename that we want to create.
     save_file_name = f"{picked_filename_without_file_extension}_(converted).xlsx"
-    save_file_path = f"{save_location}/{save_file_name}"
+    save_file_path = f"{save_location}\\{save_file_name}"
     workbook = xlsx.Workbook(save_file_path)
     # The workbook object is then used to add new worksheet via the add_worksheet() method.
     worksheet = workbook.add_worksheet()
@@ -149,14 +153,13 @@ def ConvertToXLSX(file: str):
                             worksheet.write(f"{alphabet[i]}{idx + 1}", row[i])
                 for i in range(len(column_length)):
                     worksheet.set_column(i,idx, column_length[i])
+        workbook.close()
         with open(save_file_path, 'rb') as fh:
             return {"file": fh.read(),
                     "filename": save_file_name,
                     "filepath": save_file_path}
     except:
-        return {"file": NULL,
-                "filename": NULL,
-                "filepath": NULL}
+        print("An exception occurred")
+        return NULL
     finally:
         os.remove(filepath)
-        workbook.close()
