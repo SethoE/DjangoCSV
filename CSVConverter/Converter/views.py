@@ -1,7 +1,8 @@
 from asyncio.windows_events import NULL
 from audioop import reverse
+from ctypes import WinError
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.views import View
 from string import ascii_uppercase
 from .forms import ConverterForm
@@ -12,58 +13,71 @@ import os
 import mimetypes
 from django.http.response import HttpResponse
 
+
 def store_file(file):
     BASE_DIR = os.path.dirname(os.path.abspath(__name__))
     filepath = BASE_DIR + f"\\temp\\{file}"
     with open(filepath, "wb+") as destination:
         for chunk in file.chunks():
-              destination.write(chunk)
+            destination.write(chunk)
+
+
 class UploadFileView(View):
     def get(self, request):
         form = ConverterForm()
         return render(request, "converter/converter.html", {
             "form": form
         })
+
     def post(self, request):
         submitted_form = ConverterForm(request.POST, request.FILES)
         if(submitted_form.is_valid):
             uploaded_file_name = request.FILES["user_file"]
             store_file(uploaded_file_name)
-            converted_file =  ConvertToXLSX(uploaded_file_name)
-            if(converted_file == NULL ):
+            converted_file = ConvertToXLSX(uploaded_file_name)
+            if(converted_file == NULL):
                 return HttpResponseRedirect("file error")
             return HttpResponseRedirect(f"download file/filename={converted_file['filename']}")
         return render(request, "converter/converter.html", {
             "form": submitted_form
         })
 
+
 def index(request):
     num_visits = request.session.get('num_visits', 0)
     request.session['num_visits'] = num_visits + 1
-    users_session_key =  request.session.session_key
+    users_session_key = request.session.session_key
     return render(request, "converter/index.html", {
         "number_of_visits": request.session['num_visits'],
         "session_key": users_session_key
     })
+
+
 class Login(View):
     def get(self, request):
         return render(request, "converter/login.html")
+
+
 class DownloadView(View):
     def get(self, request, filename):
         return render(request, "converter/filedownload.html", {
             "filename": filename
         })
 
+
 class alpabet():
     excel_alphabet = []
+
     def generate_excel_alphabet():
-        excel_alphabet = [ascii_uppercase[i] for i in range(len(ascii_uppercase))]
+        excel_alphabet = [ascii_uppercase[i]
+                          for i in range(len(ascii_uppercase))]
         for i in range(26 + 1):
             if(i == 0):
                 continue
         for j in range(26):
             excel_alphabet.append(excel_alphabet[i - 1] + excel_alphabet[j])
         return excel_alphabet
+
 
 def download_file(request, filename):
     BASE_DIR = os.path.dirname(os.path.abspath(__name__))
@@ -74,15 +88,18 @@ def download_file(request, filename):
         mime_type, _ = mime_type, _ = mimetypes.guess_type(filepath)
         response = HttpResponse(path, content_type=mime_type)
         response['Content-Disposition'] = "attachment; filename=%s" % filename
-        return response
-    except:
-         return HttpResponseRedirect("file error")
-    finally:
         os.remove(filepath)
+        return response
+    except WindowsError:
+        return redirect("/quick-csv-converter")
+    except:
+        return HttpResponseRedirect("file error")
+
 
 class File_download_error(View):
     def get(self, request):
         return render(request, "converter/downloaderror.html")
+
 
 def ConvertToXLSX(file: str):
     file_str = str(file)
@@ -121,7 +138,8 @@ def ConvertToXLSX(file: str):
                 if(idx == 0):
                     attributes = row
                     for i in range(len(attributes)):
-                        worksheet.write(f"{alphabet[i]}{idx + 1}", attributes[i])
+                        worksheet.write(
+                            f"{alphabet[i]}{idx + 1}", attributes[i])
                 else:
                     for i in range(len(row)):
                         try:
@@ -137,7 +155,7 @@ def ConvertToXLSX(file: str):
                         except:
                             worksheet.write(f"{alphabet[i]}{idx + 1}", row[i])
                 for i in range(len(column_length)):
-                    worksheet.set_column(i,idx, column_length[i])
+                    worksheet.set_column(i, idx, column_length[i])
         workbook.close()
         with open(save_file_path, 'rb') as fh:
             return {"file": fh.read(),

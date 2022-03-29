@@ -5,7 +5,7 @@ from . import views
 
 urlpatterns = [
     path("", views.index, name="index"),
-    path("csv-to-xlsx", views.UploadFileView.as_view(), name="converter"),
+    path("quick-csv-converter", views.UploadFileView.as_view(), name="converter"),
     path("download file/filename=<str:filename>", views.DownloadView.as_view(), name="download"),
     path("download/filename=<str:filename>", views.download_file),
     path("login", views.Login.as_view(), name="login"),
