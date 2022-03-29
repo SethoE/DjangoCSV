@@ -7,16 +7,19 @@ html, body {
     width: auto !important;  /* Firefox will set width as auto */
     width: 1500px;
 }
-
+/* --sea-green: #0a8754ff;
+--orange-red-crayola: #ff5a5fff;
+--y-in-mn-blue: #384e77ff;
+--middle-blue: #68c3d4ff; */
 
 .navbar {
-    background-color:  #148CAC; /*Navigation bar color*/
+    background-color:  #384e77ff; /*Navigation bar color*/
     overflow: hidden;
 }
 /* Style the links inside the navigation bar */
 .index, .converter {
     float: left; /*right of the container*/
-    color: #181243; /*Text Color*/
+    color: white; /*Text Color*/
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
@@ -26,7 +29,7 @@ html, body {
 }
 .login {
   float: right; /*right of the container*/
-  color: #181243; /*Text Color*/
+  color: white; /*Text Color*/
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
@@ -36,8 +39,7 @@ html, body {
 
 
 .navbar a:hover {
-    background-color: #04323F;
-    color: white;
+    background-color: #122b58;
 }
 
 /*Style for the sidebar*/

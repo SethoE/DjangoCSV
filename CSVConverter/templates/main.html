@@ -13,9 +13,9 @@
 <body>
     <header>
         <nav class="navbar">
-            <a class="index" href="{% url 'index' %}">Home</a>
+            <a class="index" href="{% url 'index' %}"><i class="fa fa-home"></i> Home</a>
             <a class="converter" href="{% url 'converter' %}">CSV-to-XLSX</a>
-            <a class="login" href="{% url 'login' %}">Login</a>
+            <a class="login" href="{% url 'login' %}"><i class='fa fa-user'></i> Login</a>
         </nav>
     </header>
     {% block body %}{% endblock body %}

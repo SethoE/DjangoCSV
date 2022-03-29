@@ -3,6 +3,27 @@
 }
 
 .navbar a.index {
-    background-color: #04323F;
+    background-color: #122b58;
+    color: white;
+}
+
+.visitscounterContainer {
+    margin: 0 auto;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 40px;
+    border: solid 4px #086d45;
+    background-color: #0a8754ff;
+}
+
+#userIcon {
+    color: white;
+    text-align: center;
+    font-size: 36px;
+}
+.counterText {
+    text-align: center;
+    font-size: 24px;
     color: white;
 }

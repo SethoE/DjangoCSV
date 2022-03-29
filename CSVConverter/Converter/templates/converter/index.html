@@ -2,9 +2,16 @@
 {% load static %}
 {% block css_link %}
 <link rel="stylesheet" href="{% static "converter/index.css"%}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 {% endblock css_link %}
 {% block page_title %}CSV Converter{% endblock page_title %}
 {% block body %}
     <h1 class="title">Hallo zum CSV-Konverter.</h1>
     <p class="pageDescription">Wir heißen Sie herlich willkommen und freuen uns das Sie unsere Seite besuchen.</p>
+    <div class="visitscounterContainer">
+        <i id="userIcon" class="fa fa-users"></i>
+        <div>
+            <p class="counterText">Session key: {{ session_key }} <br>Number of visits: {{ number_of_visits }}</p>
+        </div>
+    </div>
 {% endblock body %}

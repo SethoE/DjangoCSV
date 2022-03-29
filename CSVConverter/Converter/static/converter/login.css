@@ -3,7 +3,7 @@
 }
 
 .navbar a.login {
-    background-color: #04323F;
+    background-color: #122b58;
     color: white;
 }
 
@@ -17,9 +17,9 @@
 
 .emailContainer, .passwordContainer {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: baseline;
-    margin: 15px auto;
+    margin: 5px auto;
 }
 
 .inputEmailDescription, .inputPasswordDescription  {
@@ -28,28 +28,30 @@
 .loginContainer {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    background-color: #00455a;
+    align-items: center;
+    background-color: #273753;
     margin: 0 auto;
+    margin-top: 10%;
     width: 60%;
     border-radius: 5px;
 }
+
 .email, .password {
     width: 300px;
     height: 25px;
 }
 .loginButton {
     width: 60%;
-    margin: 0 auto 30px;
+    margin: 20px auto 30px;
     border: hidden;
     border-radius: 5px;
-    background-color: teal;
+    background-color: #0a8754ff;
     height: 35px;
     font-size: 18px;
     color: white;
 }
 .loginButton:hover {
-    background-color: #006b6b;
+    background-color: #02663e;
     cursor: pointer;
 }
 /* Login form style end */
