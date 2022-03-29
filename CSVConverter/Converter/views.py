@@ -46,10 +46,9 @@ class UploadFileView(View):
 def index(request):
     num_visits = request.session.get('num_visits', 0)
     request.session['num_visits'] = num_visits + 1
-    users_session_key = request.session.session_key
     return render(request, "converter/index.html", {
         "number_of_visits": request.session['num_visits'],
-        "session_key": users_session_key
+        "session_key": request.session.session_key
     })
 
 
