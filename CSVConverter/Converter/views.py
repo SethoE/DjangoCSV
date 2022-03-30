@@ -34,7 +34,7 @@ class UploadFileView(View):
             converted_file = ConvertToXLSX(uploaded_file_name)
             if(converted_file == "NULL"):
                 return HttpResponseRedirect("file error")
-            return HttpResponseRedirect(f"download file/filename={converted_file['filename']}")
+            return HttpResponseRedirect(f"/download file/filename={converted_file['filename']}")
         return render(request, "converter/converter.html", {
             "form": submitted_form
         })
