@@ -1,17 +1,23 @@
-.body_title {
-    text-align: center;
-}
 
-.navbar a.login {
+.navbar a.register {
     background-color: #122b58;
     color: white;
 }
 
-/* Login form style start*/
-.loginTitle {
+.register {
+    display: block;
+}
+
+
+.body_title {
     text-align: center;
 }
-.loginTitle, .inputEmailDescription, .inputPasswordDescription  {
+/* register container style start */
+
+.registerTitle {
+    text-align: center;
+}
+.registerTitle, .inputEmailDescription, .inputPasswordDescription  {
     color: white;
 }
 
@@ -23,9 +29,9 @@
 }
 
 .inputEmailDescription, .inputPasswordDescription  {
-    width: 100px;
+    width: 100%;
 }
-.loginContainer {
+.registerContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -40,7 +46,7 @@
     width: 300px;
     height: 25px;
 }
-.loginButton {
+.registerButton {
     width: 60%;
     margin: 20px auto 30px;
     border: hidden;
@@ -50,32 +56,10 @@
     font-size: 18px;
     color: white;
 }
-.loginButton:hover {
-    background-color: #02663e;
-    cursor: pointer;
-}
-
-.registerContainer {
-    display: flex;
-    width: 100%;
-    flex-direction: row;
-    align-items: baseline;
-    justify-content: space-evenly;
-}
-.buttonDescription {
-    color: white;
-}
-.registerButton {
-    border: solid 3px #0a8754ff;;
-    border-radius: 5px;
-    background-color: transparent;
-    height: 35px;
-    font-size: 18px;
-    color: white;
-}
-
 .registerButton:hover {
     background-color: #02663e;
     cursor: pointer;
 }
-/* Login form style end */
+
+/* register container style end */
+

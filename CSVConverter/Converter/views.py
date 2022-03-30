@@ -42,13 +42,22 @@ class UploadFileView(View):
             "form": submitted_form
         })
 
+def get_client_ip(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip
 
 def index(request):
     num_visits = request.session.get('num_visits', 0)
     request.session['num_visits'] = num_visits + 1
+    user_ip_address = get_client_ip(request)
     return render(request, "converter/index.html", {
         "number_of_visits": request.session['num_visits'],
-        "session_key": request.session.session_key
+        "session_key": request.session.session_key,
+        "ip_address": user_ip_address
     })
 
 
@@ -56,7 +65,9 @@ class Login(View):
     def get(self, request):
         return render(request, "converter/login.html")
 
-
+class Register(View):
+    def get(self, request):
+        return render(request, "converter/register.html")
 class DownloadView(View):
     def get(self, request, filename):
         return render(request, "converter/filedownload.html", {
