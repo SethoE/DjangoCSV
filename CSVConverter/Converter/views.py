@@ -103,7 +103,7 @@ def download_file(request, filename):
 
 class File_download_error(View):
     def get(self, request):
-        return render(request, "converter/downloaderror.html")
+        return render(request, "converter/downloadError.html")
 
 
 def ConvertToXLSX(file: str):
