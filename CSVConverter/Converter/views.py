@@ -1,6 +1,3 @@
-from asyncio.windows_events import NULL
-from audioop import reverse
-from ctypes import WinError
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.views import View
@@ -35,7 +32,7 @@ class UploadFileView(View):
             uploaded_file_name = request.FILES["user_file"]
             store_file(uploaded_file_name)
             converted_file = ConvertToXLSX(uploaded_file_name)
-            if(converted_file == NULL):
+            if(converted_file == "NULL"):
                 return HttpResponseRedirect("file error")
             return HttpResponseRedirect(f"download file/filename={converted_file['filename']}")
         return render(request, "converter/converter.html", {
@@ -100,10 +97,8 @@ def download_file(request, filename):
         response['Content-Disposition'] = "attachment; filename=%s" % filename
         os.remove(filepath)
         return response
-    except WindowsError:
-        return redirect("/quick-csv-converter")
     except:
-        return HttpResponseRedirect("file error")
+        return redirect("/quick-csv-converter")
 
 
 class File_download_error(View):
@@ -172,6 +167,6 @@ def ConvertToXLSX(file: str):
                     "filename": save_file_name,
                     "filepath": save_file_path}
     except:
-        return NULL
+        return "NULL"
     finally:
         os.remove(filepath)
