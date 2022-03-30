@@ -121,7 +121,7 @@ def ConvertToXLSX(file: str):
     cell_format_number.set_num_format('0')
     cell_format_currency.set_num_format('€#,##0.00')
     try:
-        with open(filepath, newline="") as your_csv_file:
+        with open(filepath, 'r') as your_csv_file:
             reader = csv.reader(your_csv_file)
             data = []
             keys = []
@@ -130,14 +130,14 @@ def ConvertToXLSX(file: str):
                 column_length = [0] * len(row[1])
                 break
             alphabet = alpabet.generate_excel_alphabet()
-        with open(filepath, newline="") as your_csv_file:
+        with open(filepath, 'r') as your_csv_file:
             reader = csv.reader(your_csv_file)
             for idx, row in enumerate(reader):
                 for i in range(len(row)):
                     string_row = str(row[i])
                     if(column_length[i] < len(string_row)):
                         column_length[i] = len(string_row)
-        with open(filepath, newline="") as your_csv_file:
+        with open(filepath, 'r') as your_csv_file:
             reader = csv.reader(your_csv_file)
             for idx, row in enumerate(reader):
                 if(idx == 0):
@@ -166,7 +166,8 @@ def ConvertToXLSX(file: str):
             return {"file": fh.read(),
                     "filename": save_file_name,
                     "filepath": save_file_path}
-    except:
+    except Exception as e:
+        print("---------------------- Exception: " + str(e))
         return "NULL"
     finally:
         os.remove(filepath)
