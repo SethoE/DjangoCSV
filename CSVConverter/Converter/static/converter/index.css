@@ -8,32 +8,41 @@
 }
 
 .visitscounterContainer {
+    min-width: 600px;
     margin: 0 auto;
+    overflow: hidden;
+    justify-content: space-between;
     width: 30%;
     display: flex;
     flex-direction: column;
-    padding: 20px 40px;
-    border: solid 4px #14591dff;
-    background-color: #0a8754ff;
+    border: solid 4px #01102b;
+    background-color: #273753;
 }
 
 #userIcon {
-    color: white;
+    margin-top: 30px;
+    color: #148CAC;
     text-align: center;
     font-size: 36px;
 }
 .counterText, .useripText, .sessionText {
+    white-space: nowrap;
     text-align: center;
+    margin-left: 15px;
     font-size: 24px;
     color: white;
 }
 .ip_addressValue, .number_of_visitsValue, .sessionValue {
     text-align: center;
+    white-space: normal;
+    margin-left: 15px;
+    margin-right: 15px;
     font-size: 24px;
-    color: #122b58;
-    margin-left: 20px;
+    color: #148CAC;
 }
 .sessionContainer, .visitsContainer, .ipaddressContainer {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
 }
