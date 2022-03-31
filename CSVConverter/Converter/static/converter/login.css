@@ -75,7 +75,7 @@
 }
 
 .registerButton:hover {
-    background-color: #02663e;
+    border: solid 3px #005533;
     cursor: pointer;
 }
 /* Login form style end */
