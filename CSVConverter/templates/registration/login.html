@@ -1,0 +1,58 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block css_link %}
+<link rel="stylesheet" href="{% static "registration/login.css"%}">
+{% endblock css_link %}
+{% block page_title %}Login{% endblock page_title %}
+{% block body %}
+<h1 class="body_title">
+  Bitte melde dich mit deinen Konto-Informationen hier ein.
+</h1>
+<form class="loginForm" method="post" action="{% url 'login' %}">
+  {% csrf_token %}
+  <div class="loginContainer">
+    {% if form.errors %}
+    <p>Your username and password didn't match. Please try again.</p>
+    {% endif %}
+    {% if next %}
+      {% if user.is_authenticated %}
+        <p>Your account doesn't have access to this page. To proceed,
+        please login with an account that has access.</p>
+      {% else %}
+        <p>Please login to see this page.</p>
+      {% endif %}
+    {% endif %}
+      <h1 class="loginTitle">Login</h1>
+      <div class="emailContainer">
+        <p class="inputEmailDescription"><i class="fa fa-envelope-open"></i> E-Mail:</p>
+        <input
+          class="email"
+          type="text"
+          name="email"
+          placeholder="Enter your E-mail here"
+        />
+        {{ form.username }}
+      </div>
+      <div class="passwordContainer">
+        <p class="inputPasswordDescription"><i class="fa fa-key"></i> Password:</p>
+        <input
+          class="password"
+          type="password"
+          name="password"
+          placeholder="Enter your password here"
+        />
+        {{ form.password }}
+      </div>
+      <button class="loginButton" type="submit" value="login">Login</button>
+      <div class="registerContainer">
+        <p class="buttonDescription">Du hast noch kein Benutzerkonto?</p>
+        <button class="registerButton" type="button" onclick="gotoRegisterpage()">to register</button>
+      </div>
+  </div>
+</form>
+<script defer>
+  function gotoRegisterpage() {
+    window.location.href = "{% url 'register' %}"
+  }
+</script>
+{% endblock body %}
