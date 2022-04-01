@@ -1,5 +1,8 @@
 {% extends "main.html" %}
-
+{% load static %}
+{% block css_link %}
+<link rel="stylesheet" href="{% static "registration/logout.css"%}">
+{% endblock css_link %}
 {% block body %}
   <p>Logged out!</p>
   <a href="{% url 'login'%}">Click here to login again.</a>

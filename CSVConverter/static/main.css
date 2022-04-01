@@ -13,22 +13,30 @@ html, body {
 --middle-blue: #68c3d4ff; */
 
 .navbar {
-    background-color:  #384e77ff; /*Navigation bar color*/
-    overflow: hidden;
+  align-items: baseline;
+  background-color:  #384e77ff; /*Navigation bar color*/
+  overflow: hidden;
 }
 /* Style the links inside the navigation bar */
 .index, .converter {
-    float: left; /*right of the container*/
-    color: white; /*Text Color*/
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
-    font-weight: bold;
+  float: left;
+  color: white; /*Text Color*/
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  font-weight: bold;
 
 }
-.login, .register {
-  float: right; /*right of the container*/
+.userName {
+  display: inline;
+  color: white;
+  float: right;
+  padding: 14px 16px;
+  margin: 0;
+}
+.login, .register, .logout {
+  float: right;
   color: white; /*Text Color*/
   text-align: center;
   padding: 14px 16px;
