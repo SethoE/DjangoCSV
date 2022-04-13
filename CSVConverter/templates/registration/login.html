@@ -25,22 +25,22 @@
       <h1 class="loginTitle">Login</h1>
       <div class="emailContainer">
         <p class="inputEmailDescription"><i class="fa fa-envelope-open"></i> E-Mail:</p>
-        <input
+        {% comment %} <input
           class="email"
           type="text"
           name="email"
           placeholder="Enter your E-mail here"
-        />
+        /> {% endcomment %}
         {{ form.username }}
       </div>
       <div class="passwordContainer">
         <p class="inputPasswordDescription"><i class="fa fa-key"></i> Password:</p>
-        <input
+        {% comment %} <input
           class="password"
           type="password"
           name="password"
           placeholder="Enter your password here"
-        />
+        /> {% endcomment %}
         {{ form.password }}
       </div>
       <button class="loginButton" type="submit" value="login">Login</button>
