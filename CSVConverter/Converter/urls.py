@@ -1,6 +1,4 @@
-from django.urls import path, re_path
-from django.views.static import serve
-from django.conf import settings
+from django.urls import path
 from . import views
 
 urlpatterns = [
@@ -8,8 +6,6 @@ urlpatterns = [
     path("quick-csv-converter", views.UploadFileView.as_view(), name="converter"),
     path("download file/filename=<str:filename>", views.DownloadView.as_view(), name="download"),
     path("download/filename=<str:filename>", views.download_file),
-    path("login", views.Login.as_view(), name="login"),
-    path("register", views.Register.as_view(), name="register"),
     path("file error", views.File_download_error.as_view())
 ]
 

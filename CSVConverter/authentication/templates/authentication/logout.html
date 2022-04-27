@@ -1,0 +1,22 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block css_link %}
+<link rel="stylesheet" href="{% static "authentication/logout.css"%}">
+{% endblock css_link %}
+{% block page_title %}Logut{% endblock page_title %}
+{% block body %}
+<h1 class="body_title">
+  Hier kannst du dich abmelden.
+</h1>
+<form class="logoutForm">
+  <div class="logoutContainer">
+      <h1 class="logoutTitle">Logout</h1>
+      <button class="logoutButton" type="submit">Logout</button>
+  </div>
+</form>
+<script defer>
+  function gotoRegisterpage() {
+    window.location.href = "{% url 'sign-up' %}"
+  }
+</script>
+{% endblock body %}

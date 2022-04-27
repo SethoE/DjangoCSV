@@ -57,14 +57,6 @@ def index(request):
         "ip_address": user_ip_address
     })
 
-
-class Login(View):
-    def get(self, request):
-        return render(request, "converter/login.html")
-
-class Register(View):
-    def get(self, request):
-        return render(request, "converter/register.html")
 class DownloadView(View):
     def get(self, request, filename):
         return render(request, "converter/filedownload.html", {

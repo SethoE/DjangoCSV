@@ -1,0 +1,47 @@
+.body_title {
+    text-align: center;
+}
+
+.navbar a.logout {
+    background-color: #122b58;
+    color: white;
+}
+
+/* logout form style start*/
+.logoutTitle {
+    text-align: center;
+}
+.logoutTitle {
+    color: white;
+}
+
+.logoutContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #273753;
+    margin: 0 auto;
+    margin-top: 10%;
+    width: 60%;
+    border-radius: 5px;
+}
+
+.logoutButton {
+    width: 60%;
+    margin: 20px auto 30px;
+    border: hidden;
+    border-radius: 5px;
+    background-color: #0a8754ff;
+    height: 35px;
+    font-size: 18px;
+    color: white;
+}
+.logoutButton:hover {
+    background-color: #02663e;
+    cursor: pointer;
+}
+
+.buttonDescription {
+    color: white;
+}
+/* logout form style end */

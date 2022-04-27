@@ -20,7 +20,11 @@
 .registerTitle, .inputEmailDescription, .inputPasswordDescription  {
     color: white;
 }
-
+.firstRow, .secondRow, .thirdRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
 .emailContainer, .passwordContainer {
     display: flex;
     flex-direction: column;
@@ -29,7 +33,7 @@
 }
 
 .inputEmailDescription, .inputPasswordDescription  {
-    width: 100%;
+    width: auto;
 }
 .registerContainer {
     display: flex;
@@ -37,8 +41,8 @@
     align-items: center;
     background-color: #273753;
     margin: 0 auto;
-    margin-top: 10%;
-    width: 60%;
+    margin-top: 5%;
+    width: 80%;
     border-radius: 5px;
 }
 

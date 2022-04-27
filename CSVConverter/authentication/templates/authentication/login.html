@@ -1,7 +1,7 @@
 {% extends 'main.html' %}
 {% load static %}
 {% block css_link %}
-<link rel="stylesheet" href="{% static "converter/login.css"%}">
+<link rel="stylesheet" href="{% static "authentication/login.css"%}">
 {% endblock css_link %}
 {% block page_title %}Login{% endblock page_title %}
 {% block body %}
@@ -38,7 +38,7 @@
 </form>
 <script defer>
   function gotoRegisterpage() {
-    window.location.href = "{% url 'register' %}"
+    window.location.href = "{% url 'sign-up' %}"
   }
 </script>
 {% endblock body %}
