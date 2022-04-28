@@ -8,45 +8,111 @@
 <h1 class="body_title">
   Hier kannst du dein einen Benuzterkonto erstellen lassen.
 </h1>
-<form class="registerForm">
+<form name="registerForm" class="registerForm" method="POST" action="" onsubmit="return validateForm()">
+  {% csrf_token %}
   <div class="registerContainer">
       <h1 class="registerTitle">Register</h1>
       <div class="firstRow">
         <div class="emailContainer">
           <p class="inputEmailDescription"><i class="fa fa-envelope-open"></i> E-Mail:</p>
           <input
+            id="email"
             class="email"
             type="text"
             name="email"
             placeholder="Enter your E-mail here"
+            required
           />
         </div>
         <div class="passwordContainer">
-          <p class="inputPasswordDescription"><i class="fa fa-key"></i> Password:</p>
+          <p id="inputPasswordDescription" class="inputPasswordDescription"><i class="fa fa-key"></i> Password:</p>
           <input
+            id="password"
             class="password"
             type="password"
             name="password"
             placeholder="Enter your password here"
+            onkeydown="validatePasswordRequirements()"
+            required
             />
           </div>
       </div>
       <div class="secondRow">
+        <div class="socialTitleContainer">
+          <p class="inputSocialTitleDescription"><i class="fa fa-user"></i> Sozialer Titel:</p>
+          <div class="socialTitleRadioButton">
+            <input type="radio" id="socialTitle" name="socTitle" value="Herr" required>
+            <label class="socialTitleDescription" for="socTitle">Herr</label>
+            <input type="radio" id="socialTitle" name="socTitle" value="Frau">
+            <label class="socialTitleDescription" for="socTitle">Frau</label>
+            <input type="radio" id="socialTitle" name="socTitle" value="Divers">
+            <label class="socialTitleDescription" for="socTitle">Divers</label>
+          </div>
+        </div>
         <div class="passwordContainer">
           <p class="inputPasswordDescription"><i class="fa fa-key"></i> Password wiederholen:</p>
           <input
+            id="passwordRepeat"
             class="password"
             type="password"
             name="passwordRepeat"
             placeholder="Enter your password here"
+            required
           />
-      </div>
-      <div class="thirdRow">
-
-      </div>
-
+        </div>
+    </div>
+    <div class="thirdRow">
+        <div class="firstNameContainer">
+          <p class="inputFirstNameDescription"><i class="fa fa-user"></i> Firstname:</p>
+          <input
+            id="firstName"
+            class="firstName"
+            type="text"
+            name="firstName"
+            placeholder="Enter your firstname here"
+            required
+            />
+        </div>
+        <div class="lastNameContainer">
+          <p class="inputFirstNameDescription"><i class="fa fa-user"></i> Lastname:</p>
+          <input
+          id="lastName"
+          class="lastName"
+          type="text"
+          name="lastName"
+          placeholder="Enter your lastname here"
+          required
+          />
+        </div>
       </div>
       <button class="registerButton" type="submit">Register</button>
   </div>
 </form>
+<script defer>
+  let email = document.getElementById("email");
+  let password = document.getElementById("password");
+  let passwordRepeated = document.getElementById("passwordRepeat");
+  let socialTitle = document.getElementById("socialTitle");
+  let firstName = document.getElementById("firstName");
+  let lastName = document.getElementById("lastName");
+  let inputPasswordDescription = document.getElementById("inputPasswordDescription");
+  function validateForm() {
+    if (email.value == "" || password.value == "" || passwordRepeated.value == "" || socialTitle.value == "" || firstName.value == "" || lastName.value == "") {
+      return false;
+    }
+  }
+  function validatePasswordRequirements() {
+    if (password.value.length < 7) {
+      inputPasswordDescription.style.color = "red";
+    } else {
+      inputPasswordDescription.style.color = "white";
+    }
+    function validatePasswordRequirements() {
+      if (password.value.length < 7) {
+        inputPasswordDescription.style.color = "red";
+      } else {
+        inputPasswordDescription.style.color = "white";
+      }
+  }
+</script>
 {% endblock body %}

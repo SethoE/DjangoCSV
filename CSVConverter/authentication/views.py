@@ -15,8 +15,18 @@ class Register(View):
 
     def post(self, request):
         new_user = User()
+        register_form_dic = {
+            "email": request.POST.get('email'),
+            "password": request.POST.get('password'),
+            "passwordRepeated": request.POST.get('passwordRepeat'),
+            "socialTitle": request.POST.get('socTitle'),
+            "firstName": request.POST.get('firstName'),
+            "lastName": request.POST.get('lastName')
+        }
+        for i in register_form_dic:
+            print(f"{i}: {register_form_dic[i]}")
 
-        return HttpResponseRedirect("sign-in")
+        return render(request, "authentication/register.html")
 
 
 class Logout(View):
