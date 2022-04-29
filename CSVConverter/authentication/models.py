@@ -11,7 +11,7 @@ class User(models.Model):
     email = models.EmailField()
     is_authenticated = models.BooleanField(default=False)
 
-    def create_new_user(self, firstname: str, lastname:str, email:str, password:str):
+    def create_new_user(self, firstname: str, lastname:str, email:str, socialTitle:str ,password:str):
         self.firstname = firstname
         self.lastname = lastname
         self.email = email

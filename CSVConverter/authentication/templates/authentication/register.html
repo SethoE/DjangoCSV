@@ -25,14 +25,13 @@
           />
         </div>
         <div class="passwordContainer">
-          <p id="inputPasswordDescription" class="inputPasswordDescription"><i class="fa fa-key"></i> Password:</p>
+          <p id="inputPasswordDescription" class="inputPasswordDescription"><i class="fa fa-key"></i> <span id="passwordText">Password:</span></p>
           <input
             id="password"
             class="password"
             type="password"
             name="password"
             placeholder="Enter your password here"
-            onkeydown="validatePasswordRequirements()"
             required
             />
           </div>
@@ -88,7 +87,7 @@
       <button class="registerButton" type="submit">Register</button>
   </div>
 </form>
-<script defer>
+<script>
   let email = document.getElementById("email");
   let password = document.getElementById("password");
   let passwordRepeated = document.getElementById("passwordRepeat");
@@ -101,18 +100,18 @@
       return false;
     }
   }
+  password.addEventListener('input', validatePasswordRequirements)
   function validatePasswordRequirements() {
-    if (password.value.length < 7) {
+    var password_text = document.getElementById("passwordText")
+    console.log("Password length: " + password.value.length)
+    if (password.value.length < 8) {
       inputPasswordDescription.style.color = "red";
+      password_text.innerHTML = "Passowrd:* Minimun password length is 8.";
     } else {
       inputPasswordDescription.style.color = "white";
+      password_text.innerHTML = "Passowrd:";
     }
-    function validatePasswordRequirements() {
-      if (password.value.length < 7) {
-        inputPasswordDescription.style.color = "red";
-      } else {
-        inputPasswordDescription.style.color = "white";
-      }
   }
 </script>
 {% endblock body %}
+

@@ -23,8 +23,13 @@ class Register(View):
             "firstName": request.POST.get('firstName'),
             "lastName": request.POST.get('lastName')
         }
-        for i in register_form_dic:
-            print(f"{i}: {register_form_dic[i]}")
+        if(len(register_form_dic["password"]) >= 8 and register_form_dic["password"] == register_form_dic["passwordRepeated"]):
+            new_user.create_new_user(
+                register_form_dic["firstName"],
+                register_form_dic["lastName"],
+                register_form_dic["email"],
+                register_form_dic["socialTitle"],
+                register_form_dic["password"])
 
         return render(request, "authentication/register.html")
 
